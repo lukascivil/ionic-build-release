@@ -35,6 +35,22 @@ removeTempFiles()
 	fi
 }
 
+checkReleaseDirectory()
+ {
+	if [ ! -d "$DIRECTORY-release" ]; then
+	  echo -e "A pasta de Release nao existe! Deseja criar? (yes) or (no)"; read condtion
+	fi
+
+	condtion=""
+	if [ "$condtion" = "yes" ]; then
+		mkdir $DIRECTORY-release
+	fi
+	
+	if [ "$condtion" = "no" ]; then
+		exit;
+	fi
+}
+
 # PROJECT FOLDER
 DIRECTORY=""
 
@@ -48,6 +64,9 @@ done
 
 # PROJECT RELEASE FOLDER
 DIRECTORY_RELEASE="$DIRECTORY-release"
+
+# CHECK IF DIRECTORY_RELEASE EXIST
+checkReleaseDirectory "$DIRECTORY-release"
 
 # CHECK IF KEYSTORE EXIST
 FILE_KEYSTORE_PATH="$DIRECTORY_RELEASE/$DIRECTORY.keystore"
